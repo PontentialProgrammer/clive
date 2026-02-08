@@ -1,0 +1,203 @@
+@import "tailwindcss";
+@import url('https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css');
+/* At the very top, before anything else */
+@import url('https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css');
+
+@media print {
+  /* Force the math fonts to be visible */
+  .katex {
+    text-rendering: auto !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+  
+  /* Ensure the math doesn't overflow the page width */
+  .katex-display {
+    overflow: visible !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  /* Force colors and background graphics */
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+@keyframes scan {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite;
+}
+
+@media print {
+  /* Hide everything except the report */
+  nav, .leaflet-container, aside:first-of-type, button, .no-print {
+    display: none !important;
+  }
+
+  /* Reset the sidebar to be a full-page document */
+  aside {
+    position: static !important;
+    width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+  }
+
+  .prose {
+    max-width: 100% !important;
+    font-size: 12pt !important;
+  }
+
+  /* Force background colors to show in PDF */
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+@media print {
+  /* Hide the Map and Navbar */
+  nav, .leaflet-container, .no-print, .md\:hidden {
+    display: none !important;
+  }
+
+  /* Force the Results Sidebar to be visible and full-width */
+  aside {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    transform: none !important;
+    left: 0 !important;
+  }
+
+  /* Ensure the specific report container is shown */
+  .sidebar-report {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* Standardize the Typography for the PDF */
+  .prose {
+    max-width: none !important;
+    color: black !important;
+  }
+}
+
+@media print {
+  /* 1. Hide everything inside the React root except our special portal */
+  body * {
+    visibility: hidden;
+  }
+
+  /* 2. Make only the print portal visible and position it at the top */
+  .print-portal, .print-portal * {
+    visibility: visible;
+  }
+
+  .print-portal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: block !important;
+  }
+
+  /* 3. Standardize background and colors for PDF generation */
+  body {
+    background: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  /* 4. Hide standard UI elements just in case */
+  nav, .leaflet-container, aside, button {
+    display: none !important;
+  }
+}
+
+@media print {
+  /* Force the browser to show colors and math symbols correctly */
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Make sure the math formulas don't get cut off or turned into plain text */
+  .katex-display {
+    margin: 1em 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Force the Emerald Green headers to stay Green in the PDF */
+  .prose h1, .prose h2, .prose h3 {
+    color: #064e3b !important; 
+    break-after: avoid; 
+  }
+
+  /* Force the text to look like a professional document */
+  .prose {
+    font-size: 11pt !important;
+    max-width: none !important;
+    text-align: justify !important;
+  }
+}
+
+@media print {
+  /* ... existing print code ... */
+
+  /* Prevent headers from being "left behind" at the bottom of a page */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Prevent formulas and methodology cards from being split across two pages */
+  .katex-display, blockquote, .grid > div {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Force a clean page break before the "Methodology" or "Recommendations" section if you want */
+  .print-new-page {
+    page-break-before: always;
+    break-before: page;
+  }
+}
+
+@media print {
+  /* 1. Kill everything on the page */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* 2. Resurrect ONLY the print portal and its contents */
+  .print-portal, .print-portal * {
+    visibility: visible !important;
+  }
+
+  /* 3. Force the portal to the top-left corner of the paper */
+  .print-portal {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    display: block !important;
+    background: white !important;
+  }
+
+  /* 4. Fix KaTeX (Math) disappearing */
+  .katex-html {
+    display: inline-block !important;
+  }
+
+  /* 5. Hide the map, markers, and buttons specifically */
+  .leaflet-container, .no-print, button, nav {
+    display: none !important;
+  }
+}
